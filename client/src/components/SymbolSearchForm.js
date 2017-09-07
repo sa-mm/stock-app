@@ -16,12 +16,8 @@ class SymbolSearchForm extends Component {
   }
 
   handleSubmit = event => {
-    // console.log(event)
     const { symbol } = this.state
-    console.log(symbol)
-
-    // const onSymbolSubmit = this.props.actions.onSymbolSubmit.bind(this)
-    // search(symbol, onSymbolSubmit)
+    // console.log(symbol)
     this.props.actions.onSymbolSubmit(symbol)
   }
 
@@ -30,8 +26,8 @@ class SymbolSearchForm extends Component {
     const showWarning = this.props.currentStock.stock.error ? true : false
     let msg = ''
     if (showWarning) {
-      console.log(this.props.currentStock.stock.error)
-      console.log(this.props.currentStock.stock.error.message)
+      // console.log(this.props.currentStock.stock.error)
+      // console.log(this.props.currentStock.stock.error.message)
       msg = this.props.currentStock.stock.error.message
     }
 

@@ -6,7 +6,7 @@ import registerServiceWorker from './registerServiceWorker'
 import 'semantic-ui-css/semantic.min.css'
 
 // State related
-import { compose, createStore, applyMiddleware } from 'redux' // centralized state management
+import { compose, createStore, applyMiddleware } from 'redux' // state management
 import { Provider, connect } from 'react-redux'
 import thunkMiddleware from 'redux-thunk' // for async actions
 import persistState from 'redux-sessionstorage' // persist state through session

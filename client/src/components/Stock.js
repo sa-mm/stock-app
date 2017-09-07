@@ -15,6 +15,7 @@ class Stock extends Component {
       active: false
     }
 
+    // So the component is dimmed, initially
     this.initialState = Object.assign({}, this.defaultState, { active: true })
 
     this.state = { ...this.initialState }

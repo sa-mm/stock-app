@@ -65,12 +65,9 @@ export const fetchStock = (symbol) => {
 
     // In this case, we return a promise to wait for.
     // This is not required by thunk middleware, but it is convenient for us.
-    // const url = 'http://localhost:4000/' + symbol
-    // const url = process.env.REACT_APP_SERVER_URL + symbol
-    // const url = 'https://ancient-gorge-56998.herokuapp.com/' + symbol
 
-    const url = process.env.REACT_APP_SERVER_URL + symbol
-
+    // Proxy specified in package.json
+    // Assumes API server on port 5000
     return fetch('/api/' + symbol)
       .then(
       response => response.json(),
