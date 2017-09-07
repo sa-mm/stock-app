@@ -24,7 +24,6 @@ class Stock extends Component {
   componentWillReceiveProps(nextProps) {
     const nextSymbol = nextProps.currentStock.stock.symbol
     const symbol = this.props.currentStock.stock.symbol
-    console.log('componentWillReceiveProps is being called')
 
     // If a new symbol is passed to the compoennt,
     // then the state should be reset:

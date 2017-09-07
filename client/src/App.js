@@ -28,7 +28,7 @@ class App extends Component {
             <Grid.Row columns={2} divided>
               <Grid.Column width={8}>
                 <Stock
-                  portfolio={{ stocks, balance}}
+                  portfolio={{ stocks, balance }}
                   currentStock={currentStock}
                   actions={{ onBuyClick, onSellClick }}
                 />
