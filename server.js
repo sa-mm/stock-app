@@ -3,6 +3,7 @@ const request = require('request')
 const path = require('path')
 
 const app = express()
+const PORT = process.env.PORT || 5000
 
 const allowCrossDomain = function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
@@ -40,5 +41,4 @@ app.get('/api/:symbol', function (req, res) {
   })
 })
 
-const port = process.env.PORT || 3333
-app.listen(port)
+app.listen(PORT)

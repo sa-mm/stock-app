@@ -1,21 +1,50 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import { Segment, Grid } from 'semantic-ui-react'
+import TitleBar from './components/TitleBar'
+import Stock from './components/Stock'
+import Portfolio from './components/Portfolio'
+
+const style = {
+  maxWidth: '780px',
+  marginRight: '80px',
+  marginLeft: '80px',
+  marginTop: '80px',
+  marginBottom: '80px'
+}
 
 class App extends Component {
-  render() {
+  render () {
+    const { stocks, balance, currentStock, onBuyClick, onSellClick, onSymbolSubmit } = this.props
+
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className='App' style={style}>
+        <Segment raised>
+          <Grid divided='vertically'>
+            <Grid.Row columns={1}>
+              <Grid.Column>
+                <TitleBar actions={{ onSymbolSubmit }} currentStock={currentStock} />
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row columns={2} divided>
+              <Grid.Column width={8}>
+                <Stock
+                  portfolio={{ stocks, balance}}
+                  currentStock={currentStock}
+                  actions={{ onBuyClick, onSellClick }}
+                />
+              </Grid.Column>
+              <Grid.Column width={8}>
+                <Portfolio
+                  portfolio={{ stocks, balance }}
+                  actions={{ onSymbolSubmit }}
+                />
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Segment>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
