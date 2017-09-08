@@ -12,11 +12,11 @@ class Stock extends Component {
       priceTooHigh: false,
       sellingTooMany: false,
       warningColor: '',
-      active: false
+      dimmerActive: false
     }
 
     // So the component is dimmed, initially
-    this.initialState = Object.assign({}, this.defaultState, { active: true })
+    this.initialState = Object.assign({}, this.defaultState, { dimmerActive: true })
 
     this.state = { ...this.initialState }
   }
@@ -76,7 +76,6 @@ class Stock extends Component {
 
       //reset internal state of component
       this.resetState()
-
     }
   }
 
@@ -111,12 +110,12 @@ class Stock extends Component {
     const { symbol, name, bidPrice, askPrice } = stock
     const { stocks } = this.props.portfolio
     const ownsStock = stocks ? stocks.some(e => e.symbol === symbol) : false
-    const { active } = this.state
+    const { dimmerActive } = this.state
 
     return (
       <Grid>
-        <Dimmer.Dimmable as={Grid} dimmed={active}>
-          <Dimmer active={active} inverted>
+        <Dimmer.Dimmable as={Grid} dimmed={dimmerActive}>
+          <Dimmer active={dimmerActive} inverted>
             <Header color='black'>
               Lookup a stock!
           </Header>
@@ -150,10 +149,12 @@ class Stock extends Component {
                     onChange={this.handleChange}
                   />
                   <Form.Button
+                  className='buyBtn'
                     content='Buy'
                     onClick={this.handleBuySubmit}
                   />
                   <Form.Button
+                  className='sell-btn'
                     content='Sell'
                     onClick={this.handleSellSubmit}
                     disabled={!ownsStock}

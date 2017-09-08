@@ -37,6 +37,7 @@ class SymbolSearchForm extends Component {
       <Form onSubmit={this.handleSubmit} warning={showWarning}>
         <Form.Group>
           <Form.Input
+          className='symbol-input'
             placeholder='Enter Symbol'
             value={symbol}
             onChange={this.handleChange}
