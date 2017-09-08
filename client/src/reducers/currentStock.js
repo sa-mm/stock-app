@@ -1,6 +1,6 @@
 import { RECEIVE_STOCK, REQUEST_STOCK, ERROR_STOCK } from '../actions'
 
-export const currentStock = (state = { isFetching: false, stock: {} }, action) => {
+export const currentStock = (state = { isFetching: false, stock: {} }, action = {}) => {
   switch (action.type) {
     case RECEIVE_STOCK:
       return Object.assign({}, state, {isFetching: false}, {stock: action.stock})
