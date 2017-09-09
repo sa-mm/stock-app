@@ -54,7 +54,12 @@ const sellStock = (state, action) => {
   }
 }
 
-export const portfolio = (state = {}, action) => {
+const initialState = {
+  balance: 100000,
+  stocks: []
+}
+
+export const portfolio = (state = initialState, action = {}) => {
   switch (action.type) {
     case BUY:
       return buyStock(state, action)
