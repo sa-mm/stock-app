@@ -18,7 +18,7 @@ const allowCrossDomain = function (req, res, next) {
 }
 
 app.use(express.static(path.join(__dirname, 'client/build')))
-app.use(allowCrossDomain)
+// app.use(allowCrossDomain)
 
 app.get('/api/:symbol', function (req, res) {
   const symbol = req.params.symbol
