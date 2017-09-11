@@ -102,7 +102,7 @@ class TitleBar extends Component {
           </Grid.Row>
           <Grid.Row columns={1}>
             <Grid.Column>
-              <Table sortable>
+              <Table sortable fixed>
                 <Table.Header>
                   <Table.Row >
                     <Table.HeaderCell style={noBorder} sorted={column === 'name' ? direction : null} onClick={this.handleSort('name')}>
