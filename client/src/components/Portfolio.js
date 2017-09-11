@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import { Grid, Table, Button } from 'semantic-ui-react'
 import _ from 'lodash'
 
+const noBorder = {
+  borderLeft: 0
+}
+
 const StockButton = (props) => {
   const handleClick = (event) => {
     props.actions.onSymbolSubmit(props.symbol)
@@ -100,17 +104,17 @@ class TitleBar extends Component {
             <Grid.Column>
               <Table sortable>
                 <Table.Header>
-                  <Table.Row>
-                    <Table.HeaderCell sorted={column === 'name' ? direction : null} onClick={this.handleSort('name')}>
+                  <Table.Row >
+                    <Table.HeaderCell style={noBorder} sorted={column === 'name' ? direction : null} onClick={this.handleSort('name')}>
                       Company
                 </Table.HeaderCell>
-                    <Table.HeaderCell sorted={column === 'quantity' ? direction : null} onClick={this.handleSort('quantity')}>
+                    <Table.HeaderCell style={noBorder} sorted={column === 'quantity' ? direction : null} onClick={this.handleSort('quantity')}>
                       Quantity
                 </Table.HeaderCell>
-                    <Table.HeaderCell sorted={column === 'pricePaid' ? direction : null} onClick={this.handleSort('pricePaid')}>
+                    <Table.HeaderCell style={noBorder} sorted={column === 'pricePaid' ? direction : null} onClick={this.handleSort('pricePaid')}>
                       Price Paid
                 </Table.HeaderCell>
-                    <Table.HeaderCell />
+                    <Table.HeaderCell style={noBorder} />
                   </Table.Row>
                 </Table.Header>
                 <Table.Body>
