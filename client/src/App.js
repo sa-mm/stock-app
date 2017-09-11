@@ -5,11 +5,7 @@ import Stock from './components/Stock'
 import Portfolio from './components/Portfolio'
 
 const style = {
-  maxWidth: '780px',
-  marginRight: '80px',
-  marginLeft: '80px',
-  marginTop: '80px',
-  marginBottom: '80px'
+  maxWidth: '780px'
 }
 
 class App extends Component {
