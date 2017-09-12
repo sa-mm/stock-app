@@ -16,7 +16,7 @@ const StockButton = (props) => {
   )
 }
 
-class TitleBar extends Component {
+class Portfolio extends Component {
   constructor(props) {
     super(props)
     const { stocks } = this.props.portfolio
@@ -136,4 +136,4 @@ class TitleBar extends Component {
   }
 }
 
-export default TitleBar
+export default Portfolio
