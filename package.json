@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "dev": "nf run nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
@@ -14,5 +15,8 @@
     "express": "^4.15.4",
     "foreman": "^2.0.0",
     "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.0"
   }
 }
