@@ -90,3 +90,34 @@ export const fetchStock = (symbol) => {
       })
   }
 }
+
+export const REQUEST_HISTORY = 'REQUEST_HISTORY'
+export function requestHistory (symbol) {
+  return {
+    type: REQUEST_HISTORY,
+    symbol
+  }
+}
+
+// I DON'T WANT THIS YET, I THINK
+// export const fetchHistory = symbol => {
+//   return function (dispatch) {
+//     dispatch(requestHistory(symbol))
+//     return fetch('/avapi/' + symbol)
+//       .then(
+//       response => response.json(),
+//       error => console.log('An error occured.', error)
+//       )
+//       .then(json => {
+//         // const stock = Object.keys(json).map(k => json[k])[0]
+//         // if (stock.error) {
+//         //   dispatch(errorStock(symbol, stock))
+//         // } else {
+//         //   dispatch(receiveHistory(symbol, stock))
+//         // }
+//         // const stockHistory = json["Time Series (Daily)"]
+//         console.log(json)
+//       }
+//     )
+//   }
+// }

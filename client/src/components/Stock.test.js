@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { shallow, mount } from 'enzyme'
+import { shallow, mount, render } from 'enzyme'
 import Stock from './Stock'
 import { SellingTooManySharesWarning, PriceTooHighWarning } from './Warnings'
 
@@ -72,7 +72,9 @@ it('displays a warning message if the price to be paid is greater than the balan
   wrapper.find('input').simulate('change', { target: { value: '100' } })
   expect(wrapper.state().quantity).toEqual(100)
 
-  wrapper.find('button').first().simulate('click')
+  // console.log(wrapper.find('button'))
+  wrapper.find('button').at(1).simulate('click')
+  // wrapper.find('button').first().simulate('click')
   expect(wrapper.state().priceTooHigh).toEqual(true)
   expect(wrapper.containsMatchingElement(<PriceTooHighWarning />)).toEqual(true)
 

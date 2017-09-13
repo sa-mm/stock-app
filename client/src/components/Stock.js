@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Table, Form, Grid, Dimmer, Header } from 'semantic-ui-react'
 import { PriceTooHighWarning, SellingTooManySharesWarning } from './Warnings'
+import StockHistoryContainer from './StockHistoryContainer'
 
 class Stock extends Component {
   constructor(props) {
@@ -122,7 +123,7 @@ class Stock extends Component {
           </Dimmer>
           <Grid.Row>
             <Grid.Column>
-              <p>{name} ({symbol})</p>
+              <p>{name} ({symbol}) | </p> <StockHistoryContainer symbol={symbol} />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
@@ -149,7 +150,7 @@ class Stock extends Component {
                     onChange={this.handleChange}
                   />
                   <Form.Button
-                  className='buyBtn'
+                  className='buy-btn'
                     content='Buy'
                     onClick={this.handleBuySubmit}
                   />

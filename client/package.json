@@ -18,7 +18,8 @@
     "redux-sessionstorage": "^0.4.0",
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.12",
-    "semantic-ui-react": "^0.72.0"
+    "semantic-ui-react": "^0.72.0",
+    "semiotic": "1.0.5"
   },
   "scripts": {
     "start": "react-scripts start",

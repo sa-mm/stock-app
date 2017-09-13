@@ -17,8 +17,6 @@ const allowCrossDomain = function (req, res, next) {
   }
 }
 
-console.log(process.env.ALPHA_VANTAGE_KEY)
-
 app.use(express.static(path.join(__dirname, 'client/build')))
 // app.use(allowCrossDomain)
 
@@ -26,7 +24,8 @@ app.get('/avapi/:string', function (req, res) {
   const string = req.params.string
 
   const key = process.env.ALPHA_VANTAGE_KEY
-  const url = 'https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=MSFT&apikey=' + key
+  const url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&outputsize=compact&apikey=' + key
+  // const url = 'https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=MSFT&apikey=' + key
 
   request.get({
     url: url,
