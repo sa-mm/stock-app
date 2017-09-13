@@ -42,17 +42,6 @@ class StockHistoryContainer extends Component {
     const symbol = this.props.symbol
     const listItems = this.state.data.map((day, key) => (<li key={key}>{day}</li>))
     return (
-      // <Modal onOpen={this.handleOpen} trigger={<Button size='mini'>Historical Data</Button>} >
-      //   <Modal.Header>Historical Data for {symbol}</Modal.Header>
-      //   <Modal.Content>
-      //     <Modal.Description>
-      //       {/* <ul>
-      //         {listItems}
-      //       </ul> */}
-      //       <Chart />
-      //     </Modal.Description>
-      //   </Modal.Content>
-      // </Modal>
       <StockHistory handleOpen={this.handleOpen} symbol={symbol} />
     )
   }
