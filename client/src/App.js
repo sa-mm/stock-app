@@ -3,6 +3,7 @@ import { Segment, Grid } from 'semantic-ui-react'
 import TitleBar from './components/TitleBar'
 import Stock from './components/Stock'
 import Portfolio from './components/Portfolio'
+import Chart from './components/Chart'
 
 const style = {
   maxWidth: '780px'
@@ -38,6 +39,7 @@ class App extends Component {
             </Grid.Row>
           </Grid>
         </Segment>
+        <Chart />
       </div>
     )
   }

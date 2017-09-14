@@ -9,6 +9,11 @@
     "redux-testkit": "^1.0.6"
   },
   "dependencies": {
+    "@vx/axis": "0.0.138",
+    "@vx/boxplot": "0.0.136",
+    "@vx/gradient": "0.0.136",
+    "@vx/group": "0.0.136",
+    "@vx/scale": "0.0.136",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
     "react": "^15.6.1",

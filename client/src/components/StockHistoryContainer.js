@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Button, Modal } from 'semantic-ui-react'
 import fetch from 'isomorphic-fetch'
 // import Chart from './Chart'
 import { StockHistory } from './StockHistory'
@@ -40,7 +39,7 @@ class StockHistoryContainer extends Component {
 
   render() {
     const symbol = this.props.symbol
-    const listItems = this.state.data.map((day, key) => (<li key={key}>{day}</li>))
+    // const listItems = this.state.data.map((day, key) => (<li key={key}>{day}</li>))
     return (
       <StockHistory handleOpen={this.handleOpen} symbol={symbol} />
     )
