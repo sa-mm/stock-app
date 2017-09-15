@@ -10,8 +10,9 @@ class SymbolSearchForm extends Component {
   }
 
   handleChange = event => {
+    const symbol = event.target.value.toUpperCase()
     this.setState({ 
-      symbol: event.target.value 
+      symbol
     })
   }
 
