@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { shallow, mount, render } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 import Stock from './Stock'
 import { SellingTooManySharesWarning, PriceTooHighWarning } from './Warnings'
 
@@ -134,12 +134,12 @@ it('input quantity value will be an empty string if a value is input and then de
   expect(input.props().value).toEqual('')
 
   // Simulate input
-  input.simulate('change', { target: { value: '100' }})
+  input.simulate('change', { target: { value: '100' } })
   expect(wrapper.state().quantity).toEqual(100)
   expect(input.props().value).toEqual(100)
 
   // Simulate delete
-  input.simulate('change', { target: { value: 0 }})
+  input.simulate('change', { target: { value: 0 } })
   expect(wrapper.state().quantity).toEqual('')
   expect(input.props().value).toEqual('')
 

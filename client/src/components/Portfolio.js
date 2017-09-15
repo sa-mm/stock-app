@@ -17,7 +17,7 @@ const StockButton = (props) => {
 }
 
 class Portfolio extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     const { stocks } = this.props.portfolio
     let tableData
@@ -33,7 +33,7 @@ class Portfolio extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     const tableData = this.dataMapper(nextProps.portfolio.stocks)
 
     const { column } = this.state
@@ -55,7 +55,6 @@ class Portfolio extends Component {
     })
   }
 
-
   handleSort = clickedColumn => () => {
     const { column, data, direction } = this.state
 
@@ -63,7 +62,7 @@ class Portfolio extends Component {
       this.setState({
         column: clickedColumn,
         data: _.sortBy(data, [clickedColumn]),
-        direction: 'ascending',
+        direction: 'ascending'
       })
 
       return
@@ -71,12 +70,11 @@ class Portfolio extends Component {
 
     this.setState({
       data: data.reverse(),
-      direction: direction === 'ascending' ? 'descending' : 'ascending',
+      direction: direction === 'ascending' ? 'descending' : 'ascending'
     })
   }
 
-
-  render() {
+  render () {
     const { column, data, direction } = this.state
 
     const { balance } = this.props.portfolio

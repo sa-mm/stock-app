@@ -2,16 +2,16 @@ import React, { Component } from 'react'
 import { Form, Message, Loader } from 'semantic-ui-react'
 
 class SymbolSearchForm extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
-    this.state = { 
-      symbol: '' 
+    this.state = {
+      symbol: ''
     }
   }
 
   handleChange = event => {
-    this.setState({ 
-      symbol: event.target.value 
+    this.setState({
+      symbol: event.target.value
     })
   }
 
@@ -21,9 +21,9 @@ class SymbolSearchForm extends Component {
     this.props.actions.onSymbolSubmit(symbol)
   }
 
-  render() {
+  render () {
     const { symbol } = this.state
-    const showWarning = this.props.currentStock.stock.error ? true : false
+    const showWarning = !!this.props.currentStock.stock.error
     let msg = ''
     if (showWarning) {
       // console.log(this.props.currentStock.stock.error)
@@ -37,7 +37,7 @@ class SymbolSearchForm extends Component {
       <Form onSubmit={this.handleSubmit} warning={showWarning}>
         <Form.Group>
           <Form.Input
-          className='symbol-input'
+            className='symbol-input'
             placeholder='Enter Symbol'
             value={symbol}
             onChange={this.handleChange}
@@ -46,13 +46,13 @@ class SymbolSearchForm extends Component {
           <Loader active={isFetching} size='small' />
         </Form.Group>
         <Message
-            warning
-            header={msg}
-            list={[
-              'Please search for a different symbol.',
-            ]}
-            size='mini'
-          />
+          warning
+          header={msg}
+          list={[
+            'Please search for a different symbol.'
+          ]}
+          size='mini'
+        />
       </Form>
     )
   }

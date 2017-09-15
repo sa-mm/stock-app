@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow, mount } from 'enzyme'
+import { mount } from 'enzyme'
 import SymbolSearchForm from './SymbolSearchForm'
 
 test('SymbolSearchForm updates state after text input', () => {

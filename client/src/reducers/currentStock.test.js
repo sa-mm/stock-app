@@ -57,11 +57,4 @@ describe('reducer/currentStock', () => {
       stock
     })
   })
-
-  xit('should store fetched topics and override existing topics', () => {
-    const existingState = Immutable({...initialState, topicsByUrl: {url3: 'topic3'}})
-    const topicsByUrl = {url1: 'topic1', url2: 'topic2'}
-    const action = {type: actionTypes.TOPICS_FETCHED, topicsByUrl}
-    Reducer(uut).withState(existingState).expect(action).toReturnState({...initialState, topicsByUrl})
-  })
 })
