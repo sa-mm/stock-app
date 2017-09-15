@@ -5,27 +5,26 @@ const path = require('path')
 const app = express()
 const PORT = process.env.PORT || 5000
 
-const allowCrossDomain = function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization')
+// const allowCrossDomain = function (req, res, next) {
+//   res.header('Access-Control-Allow-Origin', '*')
+//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+//   res.header('Access-Control-Allow-Headers', 'X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization')
 
-  if (req.method === 'OPTIONS') {
-    res.send(200)
-  } else {
-    next()
-  }
-}
+//   if (req.method === 'OPTIONS') {
+//     res.send(200)
+//   } else {
+//     next()
+//   }
+// }
 
 app.use(express.static(path.join(__dirname, 'client/build')))
 // app.use(allowCrossDomain)
 
-app.get('/avapi/:string', function (req, res) {
-  const string = req.params.string
+app.get('/avapi/:symbol', function (req, res) {
+  const symbol = req.params.symbol
 
   const key = process.env.ALPHA_VANTAGE_KEY
-  const url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&outputsize=compact&apikey=' + key
-  // const url = 'https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=MSFT&apikey=' + key
+  const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&outputsize=compact&apikey=${key}`
 
   request.get({
     url: url,
@@ -38,7 +37,7 @@ app.get('/avapi/:string', function (req, res) {
       console.log('Status:', response.statusCode)
     } else {
       // data is already parsed as JSON:
-      // console.log(data)
+      process.env.NODE_ENV === 'dev' && console.log(data)
       res.json(data)
     }
   })

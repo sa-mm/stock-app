@@ -15,7 +15,8 @@ If you want to get things running for development:
 
 In the root directory, run:
 
-`npm start`
+- `nf run npm run dev` (to use nodemon), or
+- `nf run npm run start`
 
 In `client` run:
 
