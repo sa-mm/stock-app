@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import fetch from 'isomorphic-fetch'
-// import Chart from './Chart'
 import { StockHistory } from './StockHistory'
 
 class StockHistoryContainer extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
-      data: ['default data']
+      data: ['default data'],
+      displayChart: false
     }
   }
 
-  handleOpen = () => {
+  /* handleOpen = () => {
     const symbol = this.props.symbol
 
     fetch('/avapi/' + symbol)
@@ -30,18 +30,32 @@ class StockHistoryContainer extends Component {
         // const stockHistory = json["Time Series (Daily)"]
         // console.log(json['Time Series (Daily)'])
         const dates = Object.keys(json['Time Series (Daily)'])
-        console.log(dates)
+        // console.log(dates)
         this.setState({
-          data: dates
+          data: json
         })
       })
+  } */
+
+  async componentWillReceiveProps (nextProps) {
+    if (nextProps.symbol !== this.props.symbol) {
+      // Needs error handling!!!
+      this.setState({
+        displayChart: false
+      })
+      const res = await fetch('/avapi/' + nextProps.symbol)
+      const json = await res.json()
+      this.setState({
+        data: json,
+        displayChart: true
+      })
+    }
   }
 
-  render() {
+  render () {
     const symbol = this.props.symbol
-    // const listItems = this.state.data.map((day, key) => (<li key={key}>{day}</li>))
     return (
-      <StockHistory handleOpen={this.handleOpen} symbol={symbol} />
+      <StockHistory symbol={symbol} displayChart={this.state.displayChart} data={this.state.data} />
     )
   }
 }

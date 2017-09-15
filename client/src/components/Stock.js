@@ -4,7 +4,7 @@ import { PriceTooHighWarning, SellingTooManySharesWarning } from './Warnings'
 import StockHistoryContainer from './StockHistoryContainer'
 
 class Stock extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.defaultState = {
@@ -22,7 +22,7 @@ class Stock extends Component {
     this.state = { ...this.initialState }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     const nextSymbol = nextProps.currentStock.stock.symbol
     const symbol = this.props.currentStock.stock.symbol
 
@@ -34,7 +34,7 @@ class Stock extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate (nextProps, nextState) {
     const nextError = nextProps.currentStock.stock.error
     if (nextError) return false
     return true
@@ -75,7 +75,7 @@ class Stock extends Component {
 
       this.props.actions.onBuyClick({ symbol, price: askPrice, quantity, name })
 
-      //reset internal state of component
+      // reset internal state of component
       this.resetState()
     }
   }
@@ -100,12 +100,12 @@ class Stock extends Component {
       // do something with redux
       this.props.actions.onSellClick({ symbol, price: bidPrice, quantity })
 
-      //reset internal state of component
+      // reset internal state of component
       this.resetState()
     }
   }
 
-  render() {
+  render () {
     const { quantity } = this.state
     const stock = this.props.currentStock.stock
     const { symbol, name, bidPrice, askPrice } = stock
@@ -121,9 +121,12 @@ class Stock extends Component {
               Lookup a stock!
           </Header>
           </Dimmer>
-          <Grid.Row>
-            <Grid.Column>
-              <p>{name} ({symbol}) | </p> <StockHistoryContainer symbol={symbol} />
+          <Grid.Row columns={2}>
+            <Grid.Column floated='left' width={6}>
+              {name} ({symbol})
+            </Grid.Column>
+            <Grid.Column floated='right' width={3}>
+              <StockHistoryContainer symbol={symbol} />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
@@ -150,12 +153,12 @@ class Stock extends Component {
                     onChange={this.handleChange}
                   />
                   <Form.Button
-                  className='buy-btn'
+                    className='buy-btn'
                     content='Buy'
                     onClick={this.handleBuySubmit}
                   />
                   <Form.Button
-                  className='sell-btn'
+                    className='sell-btn'
                     content='Sell'
                     onClick={this.handleSellSubmit}
                     disabled={!ownsStock}
