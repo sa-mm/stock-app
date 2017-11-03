@@ -11,14 +11,13 @@ class SymbolSearchForm extends Component {
 
   handleChange = event => {
     const symbol = event.target.value.toUpperCase()
-    this.setState({ 
+    this.setState({
       symbol
     })
   }
 
   handleSubmit = event => {
     const { symbol } = this.state
-    // console.log(symbol)
     this.props.actions.onSymbolSubmit(symbol)
   }
 
@@ -27,8 +26,6 @@ class SymbolSearchForm extends Component {
     const showWarning = !!this.props.currentStock.stock.error
     let msg = ''
     if (showWarning) {
-      // console.log(this.props.currentStock.stock.error)
-      // console.log(this.props.currentStock.stock.error.message)
       msg = this.props.currentStock.stock.error.message
     }
 

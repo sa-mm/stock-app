@@ -7,16 +7,16 @@ import { AxisLeft, AxisBottom } from '@vx/axis'
 import { LinearGradient } from '@vx/gradient'
 import { BoxPlot } from '@vx/boxplot'
 
+// d3 stuff
+import { max, min } from 'd3-array'
+
 class Chart extends Component {
   render () {
-    // data
-    // const series = tsData['Time Series (Daily)']
     const series = this.props.data['Time Series (Daily)']
     const dates = Object.keys(series)
     const datesWithInfo = dates.map(date => {
       return { 'date': date, 'info': series[date] }
     })
-    // console.log(datesWithInfo)
     const mungedData = datesWithInfo.slice(0, 10).reverse()
 
     const width = 750
@@ -38,8 +38,8 @@ class Chart extends Component {
 
     // accessors
     const x = d => d.date
-    const min = d => Number(d['info']['3. low'])
-    const max = d => Number(d['info']['2. high'])
+    const minAcc = d => Number(d['info']['3. low'])
+    const maxAcc = d => Number(d['info']['2. high'])
     const close = d => Number(d['info']['4. close'])
     const open = d => Number(d['info']['1. open'])
     const firstQuartile = d => close(d) < open(d) ? close(d) : open(d)
@@ -57,12 +57,9 @@ class Chart extends Component {
       []
     )
 
-    const minYValue = Math.min(...values)
-    const maxYValue = Math.max(...values)
-    // const yDomain = [
-    //   minYValue - 0.1 * Math.abs(minYValue),
-    //   maxYValue + 0.1 * Math.abs(minYValue)
-    // ]
+    const minYValue = min(values)
+    const maxYValue = max(values)
+
     const yScale = scaleLinear({
       rangeRound: [yMax, 0],
       domain: [minYValue - 0.1, maxYValue + 0.1]
@@ -109,8 +106,8 @@ class Chart extends Component {
             <BoxPlot
               key={i}
               data={d}
-              min={yScale(min(d))}
-              max={yScale(max(d))}
+              min={yScale(minAcc(d))}
+              max={yScale(maxAcc(d))}
               left={xScale(x(d))}
               firstQuartile={yScale(firstQuartile(d))}
               thirdQuartile={yScale(thirdQuartile(d))}

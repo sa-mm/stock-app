@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 import { Grid, Header } from 'semantic-ui-react'
 import SymbolSearchForm from './SymbolSearchForm'
 
-// const style = {
-//   minHeight: 130
-// }
-
 class TitleBar extends Component {
   render () {
     return (
