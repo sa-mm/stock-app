@@ -11,7 +11,7 @@ import { Provider, connect } from 'react-redux'
 import thunkMiddleware from 'redux-thunk' // for async actions
 import persistState from 'redux-sessionstorage' // persist state through session
 import reducer from './reducers/index'
-import { buyStock, sellStock, fetchStock } from './actions'
+import { buyStock, sellStock, fetchHistory, fetchYahooStock } from './actions'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
@@ -33,7 +33,11 @@ const initialState = {
   },
   currentStock: {
     isFetching: false,
-    stock: { symbol: 'FREDDIE', name: 'Not Real', bidPrice: 161.75, askPrice: 161.78 }
+    yahooStock: { symbol: 'FREDDIE', shortName: 'Not Real', bid: 161.75, ask: 161.78 },
+    yahooError: '',
+    yahooResult: [],
+    history: {},
+    displayChart: false
   }
 }
 
@@ -54,7 +58,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onBuyClick: (bid) => dispatch(buyStock(bid)),
     onSellClick: (sale) => dispatch(sellStock(sale)),
-    onSymbolSubmit: (symbol) => dispatch(fetchStock(symbol))
+    onSymbolSubmit: (symbol) => dispatch(fetchYahooStock(symbol)),
+    fetchHistory: (symbol) => dispatch(fetchHistory(symbol))
   }
 }
 

@@ -1,7 +1,6 @@
 import { BUY, SELL } from '../actions'
 
 const buyStock = (state, action) => {
-  // console.log(action)
   const { symbol, price, quantity, name } = action
   const newStock = { symbol, pricePaid: price, quantity, name }
   const alreadyOwnsStock = state ? state.stocks.some(stock => stock.symbol === symbol) : ''

@@ -1,18 +1,30 @@
 {
   "name": "stockapp",
   "version": "1.0.0",
+  "standard": {
+  "parser": "babel-eslint",
+  "globals": [
+    "it", "expect", "describe", "test"
+    ]
+  },
   "description": "",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "dev": "nodemon server.js",
+    "dev:client": "cd ./client && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "d3-array": "^1.2.1",
     "express": "^4.15.4",
     "foreman": "^2.0.0",
     "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.0"
   }
 }

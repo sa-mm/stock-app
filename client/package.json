@@ -9,6 +9,11 @@
     "redux-testkit": "^1.0.6"
   },
   "dependencies": {
+    "@vx/axis": "0.0.138",
+    "@vx/boxplot": "0.0.136",
+    "@vx/gradient": "0.0.136",
+    "@vx/group": "0.0.136",
+    "@vx/scale": "0.0.136",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
     "react": "^15.6.1",
@@ -18,7 +23,8 @@
     "redux-sessionstorage": "^0.4.0",
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.12",
-    "semantic-ui-react": "^0.72.0"
+    "semantic-ui-react": "^0.72.0",
+    "semiotic": "1.0.5"
   },
   "scripts": {
     "start": "react-scripts start",

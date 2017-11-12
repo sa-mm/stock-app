@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Table, Form, Grid, Dimmer, Header } from 'semantic-ui-react'
 import { PriceTooHighWarning, SellingTooManySharesWarning } from './Warnings'
+import StockHistoryContainer from './StockHistoryContainer'
 
 class Stock extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.defaultState = {
@@ -21,9 +22,9 @@ class Stock extends Component {
     this.state = { ...this.initialState }
   }
 
-  componentWillReceiveProps(nextProps) {
-    const nextSymbol = nextProps.currentStock.stock.symbol
-    const symbol = this.props.currentStock.stock.symbol
+  componentWillReceiveProps (nextProps) {
+    const nextSymbol = nextProps.currentStock.yahooStock.symbol
+    const symbol = this.props.currentStock.yahooStock.symbol
 
     // If a new symbol is passed to the compoennt,
     // then the state should be reset:
@@ -33,8 +34,8 @@ class Stock extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    const nextError = nextProps.currentStock.stock.error
+  shouldComponentUpdate (nextProps, nextState) {
+    const nextError = nextProps.currentStock.yahooError
     if (nextError) return false
     return true
   }
@@ -56,10 +57,10 @@ class Stock extends Component {
   }
 
   handleBuySubmit = event => {
-    const { askPrice } = this.props.currentStock.stock
+    const { symbol, shortName, ask } = this.props.currentStock.yahooStock
     const { balance } = this.props.portfolio
 
-    const isTooHigh = askPrice * this.state.quantity > balance
+    const isTooHigh = ask * this.state.quantity > balance
 
     if (isTooHigh) {
       this.setState({
@@ -70,18 +71,17 @@ class Stock extends Component {
     } else {
       // do something with redux
       const { quantity } = this.state
-      const { symbol, name, askPrice } = this.props.currentStock.stock
 
-      this.props.actions.onBuyClick({ symbol, price: askPrice, quantity, name })
+      this.props.actions.onBuyClick({ symbol, price: ask, quantity, name: shortName })
 
-      //reset internal state of component
+      // reset internal state of component
       this.resetState()
     }
   }
 
   handleSellSubmit = event => {
     const { quantity } = this.state
-    const { symbol, bidPrice } = this.props.currentStock.stock
+    const { symbol, bid } = this.props.currentStock.yahooStock
     const { stocks } = this.props.portfolio
 
     const idx = stocks.findIndex(stock => stock.symbol === symbol)
@@ -97,20 +97,22 @@ class Stock extends Component {
       })
     } else {
       // do something with redux
-      this.props.actions.onSellClick({ symbol, price: bidPrice, quantity })
+      this.props.actions.onSellClick({ symbol, price: bid, quantity })
 
-      //reset internal state of component
+      // reset internal state of component
       this.resetState()
     }
   }
 
-  render() {
+  render () {
     const { quantity } = this.state
-    const stock = this.props.currentStock.stock
-    const { symbol, name, bidPrice, askPrice } = stock
+    const stock = this.props.currentStock.yahooStock
+    const { symbol, shortName, bid, ask } = stock
+    const { displayChart, history } = this.props.currentStock
     const { stocks } = this.props.portfolio
     const ownsStock = stocks ? stocks.some(e => e.symbol === symbol) : false
     const { dimmerActive } = this.state
+    const { fetchHistory } = this.props.actions
 
     return (
       <Grid>
@@ -120,9 +122,17 @@ class Stock extends Component {
               Lookup a stock!
           </Header>
           </Dimmer>
-          <Grid.Row>
-            <Grid.Column>
-              <p>{name} ({symbol})</p>
+          <Grid.Row columns={2}>
+            <Grid.Column floated='left' width={6}>
+              {shortName} ({symbol})
+            </Grid.Column>
+            <Grid.Column floated='right' width={3}>
+              <StockHistoryContainer
+                symbol={symbol}
+                fetchHistory={fetchHistory}
+                history={history}
+                displayChart={displayChart}
+              />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
@@ -136,8 +146,8 @@ class Stock extends Component {
                 </Table.Header>
                 <Table.Body>
                   <Table.Row>
-                    <Table.Cell textAlign='center'>{bidPrice}</Table.Cell>
-                    <Table.Cell textAlign='center'>{askPrice}</Table.Cell>
+                    <Table.Cell textAlign='center'>{bid}</Table.Cell>
+                    <Table.Cell textAlign='center'>{ask}</Table.Cell>
                   </Table.Row>
                 </Table.Body>
               </Table>
@@ -149,12 +159,12 @@ class Stock extends Component {
                     onChange={this.handleChange}
                   />
                   <Form.Button
-                  className='buyBtn'
+                    className='buy-btn'
                     content='Buy'
                     onClick={this.handleBuySubmit}
                   />
                   <Form.Button
-                  className='sell-btn'
+                    className='sell-btn'
                     content='Sell'
                     onClick={this.handleSellSubmit}
                     disabled={!ownsStock}

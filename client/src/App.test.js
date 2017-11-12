@@ -1,4 +1,3 @@
-// import _ from 'lodash'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
@@ -10,7 +9,13 @@ const initialState = {
   },
   currentStock: {
     isFetching: false,
-    stock: { symbol: 'FREDDIE', name: 'Not Real', bidPrice: 161.75, askPrice: 161.78 }
+    stock: { symbol: 'FREDDIE', name: 'Not Real', bidPrice: 161.75, askPrice: 161.78 },
+    yahooStock: {},
+    yahooError: '',
+    yahooResult: [],
+    history: {},
+    displayChart: false,
+    error: ''
   }
 }
 
