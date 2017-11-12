@@ -68,8 +68,12 @@ class Chart extends Component {
     const boxWidth = xScale.bandwidth()
     const actualyWidth = Math.min(40, boxWidth)
 
+    const style = {
+      display: 'block',
+      margin: 'auto'
+    }
     return (
-      < svg width={width} height={height} >
+      < svg width={width} height={height} style={style}>
         <LinearGradient id='boxplot' to='#8b6ce7' from='#87f2d4' />
         <rect
           x={0}
