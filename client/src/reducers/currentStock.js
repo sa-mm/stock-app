@@ -1,7 +1,4 @@
 import {
-  RECEIVE_STOCK,
-  REQUEST_STOCK,
-  ERROR_STOCK,
   REQUEST_HISTORY,
   RECEIVE_HISTORY,
   ERROR_HISTORY,
@@ -12,23 +9,15 @@ YAHOO_RESULT } from '../actions'
 
 const initialState = {
   isFetching: false,
-  stock: {},
   yahooStock: {},
   yahooError: '',
   yahooResult: [],
   history: {},
-  displayChart: false,
-  error: ''
+  displayChart: false
 }
 
 export const currentStock = (state = initialState, action = {}) => {
   switch (action.type) {
-    case RECEIVE_STOCK:
-      return Object.assign({}, state, { isFetching: false }, { stock: action.stock })
-    case REQUEST_STOCK:
-      return Object.assign({}, state, { isFetching: true })
-    case ERROR_STOCK:
-      return Object.assign({}, state, { isFetching: false }, { stock: action.stock })
     case REQUEST_YAHOO_STOCK:
       return Object.assign({}, state, {isFetching: true}, { yahooError: '' })
     case RECEIVE_YAHOO_STOCK:

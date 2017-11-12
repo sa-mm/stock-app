@@ -23,10 +23,10 @@ class SymbolSearchForm extends Component {
 
   render () {
     const { symbol } = this.state
-    const showWarning = !!this.props.currentStock.stock.error
+    const showWarning = !!this.props.currentStock.yahooError
     let msg = ''
     if (showWarning) {
-      msg = this.props.currentStock.stock.error.message
+      msg = this.props.currentStock.yahooError
     }
 
     const isFetching = this.props.currentStock.isFetching

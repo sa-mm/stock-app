@@ -8,10 +8,6 @@ const style = {
 
 export const StockHistory = ({ handleOpen, displayChart, data, symbol }) => (
   <Modal trigger={<Button size='mini' icon='bar chart' />} style={style} >
-    {/* <Modal.Content> */}
-    {/* <Modal.Description> */}
     {displayChart && <Chart data={data} />}
-    {/* </Modal.Description> */}
-    {/* </Modal.Content> */}
   </Modal>
 )

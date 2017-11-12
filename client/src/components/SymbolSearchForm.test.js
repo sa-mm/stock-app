@@ -6,7 +6,8 @@ test('SymbolSearchForm updates state after text input', () => {
   // Render a checkbox with label in the document
   const mock = {
     isFetching: false,
-    stock: {}
+    yahooStock: {},
+    yahooError: ''
   }
   const component = mount(
     <SymbolSearchForm currentStock={mock} />
