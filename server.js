@@ -24,7 +24,7 @@ app.get('/avapi/:symbol', function (req, res) {
       console.log('Status:', response.statusCode)
     } else {
       // data is already parsed as JSON:
-      process.env.NODE_ENV === 'dev' && console.log(data)
+      // process.env.NODE_ENV === 'dev' && console.log(data)
       res.json(data)
     }
   })
@@ -39,6 +39,27 @@ app.get('/api/:symbol', function (req, res) {
   }, (err, response, data) => {
     if (err) {
       console.log('Error:', err)
+    } else if (response.statusCode !== 200) {
+      console.log('Status:', response.statusCode)
+    } else {
+      // data is already parsed as JSON:
+      res.json(data)
+    }
+  })
+})
+
+app.get('/yahoo/:symbol', function (req, res) {
+  const symbol = req.params.symbol
+  const url = 'https://query1.finance.yahoo.com/v7/finance/quote?symbols=' + symbol
+  request.get({
+    url: url,
+    json: true,
+    headers: { 'User-Agent': 'request' }
+  }, (err, response, data) => {
+    if (err) {
+      console.log('Error:', err)
+    } else if (response.statusCode === 404) {
+      res.json({ error: 'That stock symbol was not found.' })
     } else if (response.statusCode !== 200) {
       console.log('Status:', response.statusCode)
     } else {

@@ -1,6 +1,12 @@
 {
   "name": "stockapp",
   "version": "1.0.0",
+    "standard": {
+    "parser": "babel-eslint",
+    "globals": [
+      "it", "expect", "describe", "test"
+    ]
+  },
   "description": "",
   "main": "server.js",
   "scripts": {

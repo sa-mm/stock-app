@@ -73,7 +73,6 @@ describe('components/Portfolio', () => {
     expect(tableBody.children().at(1).key()).toEqual('Apple')
 
     const tableHeaders = wrapper.find('th')
-    // console.log(tableHeaders.first().text())
 
     // Sort table by company name
     tableHeaders.first().simulate('click')

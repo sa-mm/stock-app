@@ -49,6 +49,64 @@ export function errorStock (symbol, stock) {
   }
 }
 
+export const REQUEST_YAHOO_STOCK = 'REQUEST_YAHOO_STOCK'
+export const requestYahooStock = (symbol) => {
+  return {
+    type: REQUEST_YAHOO_STOCK,
+    symbol
+  }
+}
+
+export const RECEIVE_YAHOO_STOCK = 'RECEIVE_YAHOO_STOCK'
+export const receiveYahooStock = (symbol, stock) => {
+  return {
+    type: RECEIVE_YAHOO_STOCK,
+    symbol,
+    stock
+  }
+}
+
+export const YAHOO_ERROR = 'YAHOO_ERROR'
+export const yahooError = (symbol, error) => {
+  return {
+    type: YAHOO_ERROR,
+    symbol,
+    error
+  }
+}
+
+export const YAHOO_RESULT = 'YAHOO_RESULT'
+export const yahooResult = (symbol, result) => {
+  return {
+    type: YAHOO_RESULT,
+    symbol,
+    result
+  }
+}
+
+export const fetchYahooStock = (symbol) => {
+  return (dispatch) => {
+    console.log('it\'s working?')
+    dispatch(requestYahooStock(symbol))
+    return fetch('/yahoo/' + symbol)
+      .then(
+        response => response.json(),
+        error => console.log(error)
+      )
+      .then(json => {
+        if (json.error) {
+          const errorDisplayed = `${json.error} Did you mean to search for ${symbol}?`
+          dispatch(yahooError(symbol, errorDisplayed))
+        } else {
+          dispatch(yahooResult(symbol, json.quoteResponse.result))
+          const stock = json.quoteResponse.result[0]
+          dispatch(receiveYahooStock(symbol, stock))
+          console.log('stock', stock)
+        }
+      })
+  }
+}
+
 export const fetchStock = (symbol) => {
   // Thunk middleware knows how to handle functions.
   // It passes the dispatch method as an argument to the function,
@@ -99,25 +157,34 @@ export function requestHistory (symbol) {
   }
 }
 
-// I DON'T WANT THIS YET, I THINK
-// export const fetchHistory = symbol => {
-//   return function (dispatch) {
-//     dispatch(requestHistory(symbol))
-//     return fetch('/avapi/' + symbol)
-//       .then(
-//       response => response.json(),
-//       error => console.log('An error occured.', error)
-//       )
-//       .then(json => {
-//         // const stock = Object.keys(json).map(k => json[k])[0]
-//         // if (stock.error) {
-//         //   dispatch(errorStock(symbol, stock))
-//         // } else {
-//         //   dispatch(receiveHistory(symbol, stock))
-//         // }
-//         // const stockHistory = json["Time Series (Daily)"]
-//         console.log(json)
-//       }
-//     )
-//   }
-// }
+export const RECEIVE_HISTORY = 'RECEIVE_HISTORY'
+export const receiveHistory = (symbol, history) => {
+  return {
+    type: RECEIVE_HISTORY,
+    symbol,
+    history
+  }
+}
+
+export const ERROR_HISTORY = 'ERROR_HISTORY'
+export function errorHistory (symbol, error) {
+  return {
+    type: ERROR_HISTORY,
+    symbol,
+    error
+  }
+}
+
+export const fetchHistory = symbol => {
+  return (dispatch) => {
+    dispatch(requestHistory(symbol))
+    return fetch('/avapi/' + symbol)
+      .then(
+      response => response.json(),
+      error => dispatch(errorHistory(symbol, error))
+      )
+      .then(json => {
+        dispatch(receiveHistory(symbol, json))
+      })
+  }
+}

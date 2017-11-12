@@ -57,8 +57,8 @@ class Chart extends Component {
       []
     )
 
-    const minYValue = min(values)
-    const maxYValue = max(values)
+    const minYValue = Number(min(values))
+    const maxYValue = Number(max(values))
 
     const yScale = scaleLinear({
       rangeRound: [yMax, 0],

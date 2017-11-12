@@ -10,7 +10,7 @@ const style = {
 
 class App extends Component {
   render () {
-    const { stocks, balance, currentStock, onBuyClick, onSellClick, onSymbolSubmit } = this.props
+    const { stocks, balance, currentStock, onBuyClick, onSellClick, onSymbolSubmit, fetchHistory } = this.props
 
     return (
       <div className='App' style={style}>
@@ -26,7 +26,7 @@ class App extends Component {
                 <Stock
                   portfolio={{ stocks, balance }}
                   currentStock={currentStock}
-                  actions={{ onBuyClick, onSellClick }}
+                  actions={{ onBuyClick, onSellClick, fetchHistory }}
                 />
               </Grid.Column>
               <Grid.Column width={8}>
