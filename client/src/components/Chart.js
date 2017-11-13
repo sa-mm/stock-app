@@ -99,9 +99,9 @@ class Chart extends Component {
             tickTextFill={'#1b1a1e'}
             tickLabelProps={(value, index) => {
               return {
-                transform: 'rotate(90 ' + xScale(value) + ',0)',
-                dy: '-1.8rem',
-                dx: '0.25em',
+                transform: 'rotate(45 ' + xScale(value) + ',0)',
+                dy: '-1em',
+                dx: '0.4em',
                 fontSize: 10
               }
             }}
