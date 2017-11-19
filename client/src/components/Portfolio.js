@@ -6,9 +6,9 @@ const noBorder = {
   borderLeft: 0
 }
 
-const StockButton = (props) => {
+const StockButton = ({ onSymbolSubmit, symbol }) => {
   const handleClick = (event) => {
-    props.actions.onSymbolSubmit(props.symbol)
+    onSymbolSubmit(symbol)
   }
 
   return (
@@ -44,13 +44,14 @@ class Portfolio extends Component {
   }
 
   dataMapper = stocks => {
+    const { onSymbolSubmit } = this.props
     return stocks.map(stock => {
       const { name, quantity, pricePaid, symbol } = stock
       return {
         name,
         quantity,
         pricePaid,
-        btn: <StockButton actions={this.props.actions} symbol={symbol} />
+        btn: <StockButton onSymbolSubmit={onSymbolSubmit} symbol={symbol} />
       }
     })
   }
@@ -74,18 +75,19 @@ class Portfolio extends Component {
     })
   }
 
+  formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2
+    // the default value for minimumFractionDigits depends on the currency
+    // and is usually already 2
+  })
+  formatBalance = (balance) => this.formatter.format(balance)
+
   render () {
     const { column, data, direction } = this.state
 
     const { balance } = this.props.portfolio
-    const formatter = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 2
-      // the default value for minimumFractionDigits depends on the currency
-      // and is usually already 2
-    })
-    const formatBalance = () => formatter.format(balance)
 
     return (
       <div>
@@ -95,7 +97,7 @@ class Portfolio extends Component {
               Current Portfolio
               </Grid.Column>
             <Grid.Column textAlign='right'>
-              Cash: {formatBalance()}
+              Cash: {this.formatBalance(balance)}
             </Grid.Column>
           </Grid.Row>
           <Grid.Row columns={1}>

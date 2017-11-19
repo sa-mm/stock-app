@@ -10,7 +10,7 @@ const style = {
 
 class App extends Component {
   render () {
-    const { stocks, balance, currentStock, onBuyClick, onSellClick, onSymbolSubmit, fetchHistory } = this.props
+    const { portfolio, currentStock, onBuyClick, onSellClick, onSymbolSubmit, fetchHistory } = this.props
 
     return (
       <div className='App' style={style}>
@@ -18,21 +18,23 @@ class App extends Component {
           <Grid divided='vertically'>
             <Grid.Row columns={1}>
               <Grid.Column>
-                <TitleBar actions={{ onSymbolSubmit }} currentStock={currentStock} />
+                <TitleBar onSymbolSubmit={onSymbolSubmit} currentStock={currentStock} />
               </Grid.Column>
             </Grid.Row>
             <Grid.Row columns={2} divided>
               <Grid.Column width={8}>
                 <Stock
-                  portfolio={{ stocks, balance }}
+                  portfolio={portfolio}
                   currentStock={currentStock}
-                  actions={{ onBuyClick, onSellClick, fetchHistory }}
+                  onBuyClick={onBuyClick}
+                  onSellClick={onSellClick}
+                  fetchHistory={fetchHistory}
                 />
               </Grid.Column>
               <Grid.Column width={8}>
                 <Portfolio
-                  portfolio={{ stocks, balance }}
-                  actions={{ onSymbolSubmit }}
+                  portfolio={portfolio}
+                  onSymbolSubmit={onSymbolSubmit}
                 />
               </Grid.Column>
             </Grid.Row>

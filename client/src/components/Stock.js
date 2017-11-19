@@ -17,8 +17,10 @@ class Stock extends Component {
     }
 
     // So the component is dimmed, initially
-    this.initialState = Object.assign({}, this.defaultState, { dimmerActive: true })
-
+    this.initialState = {
+      ...this.defaultState,
+      dimmerActive: true
+    }
     this.state = { ...this.initialState }
   }
 
@@ -72,7 +74,7 @@ class Stock extends Component {
       // do something with redux
       const { quantity } = this.state
 
-      this.props.actions.onBuyClick({ symbol, price: ask, quantity, name: shortName })
+      this.props.onBuyClick({ symbol, price: ask, quantity, name: shortName })
 
       // reset internal state of component
       this.resetState()
@@ -81,8 +83,9 @@ class Stock extends Component {
 
   handleSellSubmit = event => {
     const { quantity } = this.state
-    const { symbol, bid } = this.props.currentStock.yahooStock
-    const { stocks } = this.props.portfolio
+    const { currentStock, portfolio } = this.props
+    const { symbol, bid } = currentStock.yahooStock
+    const { stocks } = portfolio
 
     const idx = stocks.findIndex(stock => stock.symbol === symbol)
     const theStock = stocks[idx]
@@ -97,7 +100,7 @@ class Stock extends Component {
       })
     } else {
       // do something with redux
-      this.props.actions.onSellClick({ symbol, price: bid, quantity })
+      this.props.onSellClick({ symbol, price: bid, quantity })
 
       // reset internal state of component
       this.resetState()
@@ -105,14 +108,11 @@ class Stock extends Component {
   }
 
   render () {
-    const { quantity } = this.state
-    const stock = this.props.currentStock.yahooStock
-    const { symbol, shortName, bid, ask } = stock
-    const { displayChart, history } = this.props.currentStock
-    const { stocks } = this.props.portfolio
+    const { quantity, dimmerActive, warningColor, priceTooHigh, sellingTooMany } = this.state
+    const { fetchHistory, currentStock, portfolio: { stocks } } = this.props
+    const { displayChart, history, yahooStock } = currentStock
+    const { symbol, shortName, bid, ask } = yahooStock
     const ownsStock = stocks ? stocks.some(e => e.symbol === symbol) : false
-    const { dimmerActive } = this.state
-    const { fetchHistory } = this.props.actions
 
     return (
       <Grid>
@@ -170,8 +170,8 @@ class Stock extends Component {
                     disabled={!ownsStock}
                   />
                 </Form.Group>
-                {this.state.priceTooHigh ? <PriceTooHighWarning color={this.state.warningColor} /> : ''}
-                {this.state.sellingTooMany ? <SellingTooManySharesWarning color={this.state.warningColor} /> : ''}
+                {priceTooHigh ? <PriceTooHighWarning color={warningColor} /> : ''}
+                {sellingTooMany ? <SellingTooManySharesWarning color={warningColor} /> : ''}
               </Form>
             </Grid.Column>
           </Grid.Row>

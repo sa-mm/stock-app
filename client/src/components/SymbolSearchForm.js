@@ -18,7 +18,7 @@ class SymbolSearchForm extends Component {
 
   handleSubmit = event => {
     const { symbol } = this.state
-    this.props.actions.onSymbolSubmit(symbol)
+    this.props.onSymbolSubmit(symbol)
   }
 
   render () {

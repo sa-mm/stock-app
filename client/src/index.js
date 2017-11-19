@@ -33,7 +33,7 @@ const initialState = {
   },
   currentStock: {
     isFetching: false,
-    yahooStock: { symbol: 'FREDDIE', shortName: 'Not Real', bid: 161.75, ask: 161.78 },
+    yahooStock: { stock: { symbol: 'FREDDIE', shortName: 'Not Real', bid: 161.75, ask: 161.78 } },
     yahooError: '',
     yahooResult: [],
     history: {},
@@ -48,8 +48,9 @@ const store = createPersistentStore(
 
 const mapStateToProps = (state) => {
   return {
-    stocks: state.portfolio.stocks,
-    balance: state.portfolio.balance,
+    // stocks: state.portfolio.stocks,
+    // balance: state.portfolio.balance,
+    portfolio: state.portfolio,
     currentStock: state.currentStock
   }
 }

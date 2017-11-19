@@ -4,6 +4,7 @@ import SymbolSearchForm from './SymbolSearchForm'
 
 class TitleBar extends Component {
   render () {
+    const { onSymbolSubmit, currentStock } = this.props
     return (
       <Grid verticalAlign='top' columns='equal' padded='horizontally'>
         <Grid.Column>
@@ -11,7 +12,7 @@ class TitleBar extends Component {
         </Grid.Column>
         <Grid.Column width={3} />
         <Grid.Column>
-          <SymbolSearchForm actions={this.props.actions} currentStock={this.props.currentStock} />
+          <SymbolSearchForm onSymbolSubmit={onSymbolSubmit} currentStock={currentStock} />
         </Grid.Column>
       </Grid>
     )

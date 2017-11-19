@@ -4,19 +4,9 @@ import { shallow, mount } from 'enzyme'
 import Stock from './Stock'
 import { SellingTooManySharesWarning, PriceTooHighWarning } from './Warnings'
 
-const actions = {
-  fetchHistory: () => 'test'
-}
-
 const mockProps = {
   currentStock: {
     isFetching: false,
-    stock: {
-      symbol: 'FREDDIE',
-      name: 'Not Real',
-      bidPrice: 10,
-      askPrice: 10
-    },
     yahooStock: {
       symbol: 'FREDDIE',
       shortName: 'Not Real',
@@ -33,7 +23,9 @@ const mockProps = {
     stocks: [],
     balance: 100.00
   },
-  actions: actions
+  onBuyClick: () => 'on buy click',
+  onSellClick: () => 'on sell click',
+  fetchHistory: () => 'fetch history'
 }
 
 it('renders without crashing', () => {
@@ -68,8 +60,8 @@ it('keeps dimmer active if the stock symbol is unchanged', () => {
     ...mockProps,
     currentStock: {
       ...mockProps.currentStock,
-      stock: {
-        ...mockProps.currentStock.stock,
+      yahooStock: {
+        ...mockProps.currentStock.yahooStock,
         symbol: 'FREDDIE'
       }
     }

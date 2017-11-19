@@ -10,7 +10,7 @@ const initialState = {
   currentStock: {
     isFetching: false,
     stock: { symbol: 'FREDDIE', name: 'Not Real', bidPrice: 161.75, askPrice: 161.78 },
-    yahooStock: {},
+    yahooStock: { symbol: 'FREDDIE', shortName: 'Not Real', bid: 161.75, ask: 161.78 },
     yahooError: '',
     yahooResult: [],
     history: {},
