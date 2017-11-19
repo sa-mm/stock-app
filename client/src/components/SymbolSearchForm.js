@@ -33,7 +33,7 @@ class SymbolSearchForm extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} warning={showWarning}>
-        <Form.Group>
+        <Form.Group unstackable>
           <Form.Input
             className='symbol-input'
             placeholder='Enter Symbol'

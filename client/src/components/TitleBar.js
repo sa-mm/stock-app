@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Header, Divider } from 'semantic-ui-react'
+import { Grid, Header, Divider, Responsive } from 'semantic-ui-react'
 import SymbolSearchForm from './SymbolSearchForm'
 
 class TitleBar extends Component {
@@ -7,16 +7,22 @@ class TitleBar extends Component {
     const { onSymbolSubmit, currentStock } = this.props
     return (
       <div>
-        <Grid verticalAlign='top' columns='equal' padded='horizontally'>
-          <Grid.Column>
+        <Grid verticalAlign='top' columns='equal' doubling>
+          <Grid.Column floated='left'>
             <Header size='large' id='title'>Simple Stock Exchange</Header>
           </Grid.Column>
-          <Grid.Column width={3} />
-          <Grid.Column>
-            <SymbolSearchForm onSymbolSubmit={onSymbolSubmit} currentStock={currentStock} />
+          <Grid.Column floated='right'
+            style={{
+              display: 'flex',
+              alignItems: 'flex-end'}}
+              >
+            <SymbolSearchForm
+              onSymbolSubmit={onSymbolSubmit}
+              currentStock={currentStock}
+            />
           </Grid.Column>
         </Grid>
-        <Divider />
+        <Responsive as={Divider} minWidth={768} />
       </div>
     )
   }
