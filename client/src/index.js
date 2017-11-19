@@ -33,7 +33,7 @@ const initialState = {
   },
   currentStock: {
     isFetching: false,
-    yahooStock: { stock: { symbol: 'FREDDIE', shortName: 'Not Real', bid: 161.75, ask: 161.78 } },
+    yahooStock: { symbol: 'FREDDIE', shortName: 'Not Real', bid: 161.75, ask: 161.78 },
     yahooError: '',
     yahooResult: [],
     history: {},

@@ -15,30 +15,24 @@ class App extends Component {
     return (
       <div className='App' style={style}>
         <Segment raised>
-          <Grid divided='vertically'>
-            <Grid.Row columns={1}>
-              <Grid.Column>
-                <TitleBar onSymbolSubmit={onSymbolSubmit} currentStock={currentStock} />
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Row columns={2} divided>
-              <Grid.Column width={8}>
-                <Stock
-                  portfolio={portfolio}
-                  currentStock={currentStock}
-                  onBuyClick={onBuyClick}
-                  onSellClick={onSellClick}
-                  fetchHistory={fetchHistory}
-                />
-              </Grid.Column>
-              <Grid.Column width={8}>
-                <Portfolio
-                  portfolio={portfolio}
-                  onSymbolSubmit={onSymbolSubmit}
-                />
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
+          <TitleBar onSymbolSubmit={onSymbolSubmit} currentStock={currentStock} />
+          <Grid divided stackable reversed='mobile' columns={2}>
+          <Grid.Column width={8}>
+              <Stock
+                portfolio={portfolio}
+                currentStock={currentStock}
+                onBuyClick={onBuyClick}
+                onSellClick={onSellClick}
+                fetchHistory={fetchHistory}
+                    />
+            </Grid.Column>
+          <Grid.Column width={8}>
+              <Portfolio
+                portfolio={portfolio}
+                onSymbolSubmit={onSymbolSubmit}
+                    />
+            </Grid.Column>
+        </Grid>
         </Segment>
       </div>
     )
