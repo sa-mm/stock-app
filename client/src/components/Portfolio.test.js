@@ -40,14 +40,12 @@ describe('components/Portfolio', () => {
   it('renders a table with one row', () => {
     const wrapper = mount(<Portfolio {...mock} />)
     const tableBody = wrapper.find('tbody')
-    // console.log(tableBody.children().at(0).key())
     expect(tableBody.children().length).toEqual(1)
     expect(tableBody.children().at(0).key()).toEqual('Ford')
   })
 
   it('renders a table with more than one row in order of concatenation', () => {
     const wrapper = mount(<Portfolio {...mock} />)
-    const tableBody = wrapper.find('tbody')
 
     wrapper.setProps({
       portfolio: {
@@ -55,13 +53,14 @@ describe('components/Portfolio', () => {
         stocks: mock.portfolio.stocks.concat(apple)
       }
     })
+
+    const tableBody = wrapper.find('tbody')
     expect(tableBody.children().length).toEqual(2)
     expect(tableBody.children().at(1).key()).toEqual('Apple')
   })
 
   it('render a table that can be sorted', () => {
     const wrapper = mount(<Portfolio {...mock} />)
-    const tableBody = wrapper.find('tbody')
 
     // Add apple stock to end of portfolio
     wrapper.setProps({
@@ -70,18 +69,20 @@ describe('components/Portfolio', () => {
         stocks: mock.portfolio.stocks.concat(apple)
       }
     })
+
+    const tableBody = wrapper.find('tbody')
     expect(tableBody.children().at(1).key()).toEqual('Apple')
 
     const tableHeaders = wrapper.find('th')
 
     // Sort table by company name
     tableHeaders.first().simulate('click')
-    expect(tableBody.children().at(1).key()).toEqual('Ford')
+    const newTableBody = wrapper.find('tbody')
+    expect(newTableBody.children().at(1).key()).toEqual('Ford')
   })
 
   it('renders a table that stays sorted after new props', () => {
     const wrapper = mount(<Portfolio {...mock} />)
-    const tableBody = wrapper.find('tbody')
 
     // Add apple stock to end of portfolio
     const nextPortfolio = {
@@ -91,14 +92,15 @@ describe('components/Portfolio', () => {
       }
     }
     wrapper.setProps(nextPortfolio)
+    const tableBody = wrapper.find('tbody')
     expect(tableBody.children().at(1).key()).toEqual('Apple')
 
     const tableHeaders = wrapper.find('th')
-    // console.log(tableHeaders.first().text())
 
     // Sort table by company name
     tableHeaders.first().simulate('click')
-    expect(tableBody.children().at(1).key()).toEqual('Ford')
+    const newTableBody = wrapper.find('tbody')
+    expect(newTableBody.children().at(1).key()).toEqual('Ford')
 
     wrapper.setProps({
       portfolio: {
@@ -108,6 +110,7 @@ describe('components/Portfolio', () => {
     })
 
     // Apple should still be at index 0
-    expect(tableBody.children().at(0).key()).toEqual('Apple')
+    const lastTableBody = wrapper.find('tbody')
+    expect(lastTableBody.children().at(0).key()).toEqual('Apple')
   })
 })

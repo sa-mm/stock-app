@@ -4,7 +4,7 @@
   "standard": {
   "parser": "babel-eslint",
   "globals": [
-    "it", "expect", "describe", "test"
+    "jest", "it", "expect", "describe", "test"
     ]
   },
   "description": "",

@@ -120,24 +120,28 @@ it('has a disabled sell btn if the current stock is not in the portfolio', () =>
   expect(sellBtn.props().disabled).toEqual(true)
 })
 
-it('input quantity value will be an empty string if a value is input and then deleted', () => {
+it('state.quantity will be an empty string if a value is input and then deleted', () => {
   // Placeholder text disappears if quantity is set to 0
   const wrapper = mount(<Stock {...mockProps} />)
-  const input = wrapper.find('input')
 
   // Check the defaults
+  const input = wrapper.find('input')
   expect(wrapper.state().quantity).toEqual('')
   expect(input.props().value).toEqual('')
 
   // Simulate input
-  input.simulate('change', { target: { value: '100' } })
+  input.instance().value = 100
+  input.simulate('change', input)
+  const inputOf100 = wrapper.find('input')
   expect(wrapper.state().quantity).toEqual(100)
-  expect(input.props().value).toEqual(100)
+  expect(inputOf100.props().value).toEqual(100)
 
   // Simulate delete
-  input.simulate('change', { target: { value: 0 } })
+  input.instance().value = 0
+  input.simulate('change', input)
+  const inputAfterDeletion = wrapper.find('input')
   expect(wrapper.state().quantity).toEqual('')
-  expect(input.props().value).toEqual('')
+  expect(inputAfterDeletion.props().value).toEqual('')
 
   // Coercion, yay!
 })

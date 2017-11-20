@@ -9,8 +9,7 @@ class StockHistoryContainer extends Component {
   }
 
   render () {
-    const symbol = this.props.symbol
-    const { displayChart, history } = this.props
+    const { displayChart, history, symbol } = this.props
     return (
       <StockHistory symbol={symbol} displayChart={displayChart} data={history} />
     )
