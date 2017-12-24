@@ -4,7 +4,6 @@ import { Segment, Grid } from 'semantic-ui-react'
 import TitleBar from './components/TitleBar'
 import Stock from './components/Stock'
 import Portfolio from './components/Portfolio'
-import { currentStock } from './reducers/currentStock'
 
 const style = {
   maxWidth: '780px'
@@ -21,17 +20,17 @@ class App extends Component {
           <Grid divided stackable reversed='mobile' columns={2}>
             <Grid.Column width={8}>
               <Stock
-              portfolio={portfolio}
-              currentStock={currentStock}
-              onBuyClick={onBuyClick}
-              onSellClick={onSellClick}
-              fetchHistory={fetchHistory}
+                portfolio={portfolio}
+                currentStock={currentStock}
+                onBuyClick={onBuyClick}
+                onSellClick={onSellClick}
+                fetchHistory={fetchHistory}
                     />
             </Grid.Column>
             <Grid.Column width={8}>
               <Portfolio
-              portfolio={portfolio}
-              onSymbolSubmit={onSymbolSubmit}
+                portfolio={portfolio}
+                onSymbolSubmit={onSymbolSubmit}
                     />
             </Grid.Column>
           </Grid>
