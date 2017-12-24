@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Table, Form, Grid, Dimmer, Header } from 'semantic-ui-react'
 import { PriceTooHighWarning, SellingTooManySharesWarning } from './Warnings'
 import StockHistoryContainer from './StockHistoryContainer'
@@ -179,6 +180,14 @@ class Stock extends Component {
       </Grid>
     )
   }
+}
+
+Stock.propTypes = {
+  fetchHistory: PropTypes.func.isRequired,
+  onSellClick: PropTypes.func.isRequired,
+  onBuyClick: PropTypes.func.isRequired,
+  currentStock: PropTypes.object.isRequired,
+  portfolio: PropTypes.object.isRequired
 }
 
 export default Stock

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Grid, Table, Button } from 'semantic-ui-react'
 import { sortBy, map } from 'lodash'
 
@@ -134,6 +135,11 @@ class Portfolio extends Component {
       </div>
     )
   }
+}
+
+Portfolio.propTypes = {
+  portfolio: PropTypes.object.isRequired,
+  onSymbolSubmit: PropTypes.func.isRequired
 }
 
 export default Portfolio

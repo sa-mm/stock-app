@@ -8,7 +8,8 @@ import { shallow } from 'enzyme'
 const mockProps = {
   handleOpen: jest.fn(),
   displayChart: false,
-  data: {}
+  data: {},
+  symbol: ''
 }
 it('renders without crashing', () => {
   const div = document.createElement('div')

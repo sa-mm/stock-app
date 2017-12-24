@@ -28,7 +28,8 @@ const mock = {
   portfolio: {
     balance: 100000,
     stocks: [ford]
-  }
+  },
+  onSymbolSubmit: jest.fn()
 }
 
 it('renders without crashing', () => {

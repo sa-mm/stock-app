@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Form, Message, Loader } from 'semantic-ui-react'
 
 class SymbolSearchForm extends Component {
@@ -54,6 +55,11 @@ class SymbolSearchForm extends Component {
       </Form>
     )
   }
+}
+
+SymbolSearchForm.propTypes = {
+  currentStock: PropTypes.object.isRequired,
+  onSymbolSubmit: PropTypes.func.isRequired
 }
 
 export default SymbolSearchForm

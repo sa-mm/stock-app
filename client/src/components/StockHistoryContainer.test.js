@@ -3,9 +3,16 @@ import ReactDOM from 'react-dom'
 import StockHistoryContainer from './StockHistoryContainer'
 import { mount } from 'enzyme'
 
+const mockProps = {
+  fetchHistory: jest.fn(),
+  displayChart: false,
+  history: {},
+  symbol: 'F'
+}
+
 it('renders without crashing', () => {
   const div = document.createElement('div')
-  ReactDOM.render(<StockHistoryContainer />, div)
+  ReactDOM.render(<StockHistoryContainer {...mockProps} />, div)
 })
 
 describe('componentWillReceiveProps()', () => {

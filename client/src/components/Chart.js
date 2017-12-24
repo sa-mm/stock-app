@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 // vx stuff
 import { scaleLinear, scaleBand } from '@vx/scale'
@@ -132,6 +133,10 @@ class Chart extends Component {
       </svg>
     )
   }
+}
+
+Chart.propTypes = {
+  data: PropTypes.object.isRequired
 }
 
 Chart.defaultProps = {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Grid, Header, Divider, Responsive } from 'semantic-ui-react'
 import SymbolSearchForm from './SymbolSearchForm'
 
@@ -26,6 +27,11 @@ class TitleBar extends Component {
       </div>
     )
   }
+}
+
+TitleBar.propTypes = {
+  onSymbolSubmit: PropTypes.func.isRequired,
+  currentStock: PropTypes.object.isRequired
 }
 
 export default TitleBar

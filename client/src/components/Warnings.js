@@ -29,8 +29,14 @@ export const PriceTooHighWarning = ({ color }) => {
   )
 }
 
+const colors = [
+  'red', 'orange', 'yellow',
+  'olive', 'green', 'teal',
+  'blue', 'violet', 'purple',
+  'pink', 'brown', 'grey', 'black']
+
 const sharedTypes = {
-  color: PropTypes.oneOf(['red', 'orange', 'yellow', 'olive', 'green', 'teal', 'blue', 'violet', 'purple', 'pink', 'brown', 'grey', 'black']).isRequired
+  color: PropTypes.oneOf(colors).isRequired
 }
 
 const sharedDefaults = {

@@ -9,8 +9,12 @@ test('SymbolSearchForm updates state after text input', () => {
     yahooStock: {},
     yahooError: ''
   }
+  const otherProps = {
+    onSymbolSubmit: jest.fn()
+  }
+
   const component = mount(
-    <SymbolSearchForm currentStock={mock} />
+    <SymbolSearchForm currentStock={mock} {...otherProps} />
   )
 
   component.setState({

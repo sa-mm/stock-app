@@ -19,7 +19,14 @@ const initialState = {
   }
 }
 
+const moreProps = {
+  onBuyClick: jest.fn(),
+  onSellClick: jest.fn(),
+  onSymbolSubmit: jest.fn(),
+  fetchHistory: jest.fn()
+}
+
 it('renders without crashing', () => {
   const div = document.createElement('div')
-  ReactDOM.render(<App {...initialState} />, div)
+  ReactDOM.render(<App {...initialState} {...moreProps} />, div)
 })
