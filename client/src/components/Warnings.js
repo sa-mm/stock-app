@@ -1,10 +1,11 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Message } from 'semantic-ui-react'
 
-export const SellingTooManySharesWarning = (props) => {
+export const SellingTooManySharesWarning = ({ color }) => {
   return (
     <Message
-      color={props.color}
+      color={color}
       visible
       header='You are selling too many!'
       list={[
@@ -15,10 +16,10 @@ export const SellingTooManySharesWarning = (props) => {
   )
 }
 
-export const PriceTooHighWarning = (props) => {
+export const PriceTooHighWarning = ({ color }) => {
   return (
     <Message
-      color={props.color}
+      color={color}
       visible
       warning
       header='You are buying too many!'
@@ -27,3 +28,17 @@ export const PriceTooHighWarning = (props) => {
     />
   )
 }
+
+const sharedTypes = {
+  color: PropTypes.oneOf(['red', 'orange', 'yellow', 'olive', 'green', 'teal', 'blue', 'violet', 'purple', 'pink', 'brown', 'grey', 'black']).isRequired
+}
+
+const sharedDefaults = {
+  color: 'red'
+}
+
+SellingTooManySharesWarning.propTypes = sharedTypes
+PriceTooHighWarning.propTypes = sharedTypes
+
+SellingTooManySharesWarning.defaultProps = sharedDefaults
+PriceTooHighWarning.defaultProps = sharedDefaults
