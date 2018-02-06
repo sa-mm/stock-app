@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Form, Message, Loader } from "semantic-ui-react";
+import "./SymbolSearchForm.css";
 
 class SymbolSearchForm extends Component {
   constructor(props) {
@@ -34,12 +35,14 @@ class SymbolSearchForm extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} warning={showWarning}>
-        <Form.Group>
+        <Form.Group className="search-group">
           <Form.Input
             className="symbol-input"
             placeholder="Enter Symbol"
             value={symbol}
             onChange={this.handleChange}
+            type="search"
+            fluid
           />
           <Form.Button content="Lookup" />
           <Loader active={isFetching} size="small" />

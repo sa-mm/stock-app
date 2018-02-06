@@ -4,11 +4,7 @@ import { Segment, Grid } from "semantic-ui-react";
 import TitleBar from "./components/TitleBar";
 import Stock from "./components/Stock";
 import Portfolio from "./components/Portfolio";
-
-const style = {
-  maxWidth: "780px",
-  maxHeight: "100%"
-};
+import "./App.css";
 
 class App extends Component {
   render() {
@@ -22,7 +18,7 @@ class App extends Component {
     } = this.props;
 
     return (
-      <div className="App" style={style}>
+      <div className="App">
         <Segment.Group raised>
           <Segment>
             <TitleBar

@@ -1,0 +1,9 @@
+.symbol-input {
+    width: 130px;
+    padding-bottom: 10px;
+}
+
+.search-group {
+    display: flex;
+    justify-content: flex-end;
+}

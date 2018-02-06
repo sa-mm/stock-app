@@ -14,13 +14,7 @@ class TitleBar extends Component {
               Simple Stock Exchange
             </Header>
           </Grid.Column>
-          <Grid.Column
-            floated="right"
-            style={{
-              display: "flex",
-              alignItems: "flex-end"
-            }}
-          >
+          <Grid.Column floated="right">
             <SymbolSearchForm
               onSymbolSubmit={onSymbolSubmit}
               currentStock={currentStock}

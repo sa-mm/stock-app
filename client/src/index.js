@@ -1,30 +1,36 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import './index.css'
-import App from './App'
-// import registerServiceWorker from './registerServiceWorker'
-import 'semantic-ui-css/semantic.min.css'
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import registerServiceWorker from "./registerServiceWorker";
+import "semantic-ui-css/semantic.min.css";
 
 // State related
-import { compose, createStore, applyMiddleware } from 'redux'
-import { Provider, connect } from 'react-redux'
-import thunkMiddleware from 'redux-thunk'
-import persistState from 'redux-sessionstorage' // persist state through session
-import reducer from './reducers/index'
-import { buyStock, sellStock, fetchHistory, fetchYahooStock, fetchIexStock } from './actions'
+import { compose, createStore, applyMiddleware } from "redux";
+import { Provider, connect } from "react-redux";
+import thunkMiddleware from "redux-thunk";
+import persistState from "redux-sessionstorage"; // persist state through session
+import reducer from "./reducers/index";
+import {
+  buyStock,
+  sellStock,
+  fetchHistory,
+  fetchYahooStock,
+  fetchIexStock
+} from "./actions";
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const config = {
-  key: 'awesomestockapp'
-}
+  key: "awesomestockapp"
+};
 
-const paths = ['portfolio']
+const paths = ["portfolio"];
 
 const createPersistentStore = composeEnhancers(
   applyMiddleware(thunkMiddleware),
   persistState(paths, config)
-)(createStore)
+)(createStore);
 
 const initialState = {
   portfolio: {
@@ -33,49 +39,48 @@ const initialState = {
   },
   currentStock: {
     isFetching: false,
-    yahooStock: { symbol: 'FREDDIE', shortName: 'Not Real', bid: 161.75, ask: 161.78 },
-    yahooError: '',
+    yahooStock: {
+      symbol: "FREDDIE",
+      shortName: "Not Real",
+      bid: 161.75,
+      ask: 161.78
+    },
+    yahooError: "",
     yahooResult: [],
     history: {},
     displayChart: false,
     stock: {}
   }
-}
+};
 
-const store = createPersistentStore(
-  reducer,
-  initialState
-)
+const store = createPersistentStore(reducer, initialState);
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     portfolio: state.portfolio,
     currentStock: state.currentStock
-  }
-}
+  };
+};
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    onBuyClick: (bid) => dispatch(buyStock(bid)),
-    onSellClick: (sale) => dispatch(sellStock(sale)),
-    onSymbolSubmit: (symbol) => {
-      dispatch(fetchIexStock(symbol))
-      dispatch(fetchYahooStock(symbol))
+    onBuyClick: bid => dispatch(buyStock(bid)),
+    onSellClick: sale => dispatch(sellStock(sale)),
+    onSymbolSubmit: symbol => {
+      dispatch(fetchIexStock(symbol));
+      dispatch(fetchYahooStock(symbol));
     },
-    fetchHistory: (symbol) => dispatch(fetchHistory(symbol))
-  }
-}
+    fetchHistory: symbol => dispatch(fetchHistory(symbol))
+  };
+};
 
-const AppContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
+const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
 
 ReactDOM.render(
   <Provider store={store}>
     <AppContainer />
   </Provider>,
-  document.getElementById('root')
-)
+  document.getElementById("root")
+);
 
 // registerServiceWorker()
