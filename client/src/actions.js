@@ -31,10 +31,27 @@ export const requestYahooStock = (symbol) => {
   }
 }
 
+export const REQUEST_IEX_STOCK = 'REQUEST_IEX_STOCK'
+export const requestIexStock = symbol => {
+  return {
+    type: REQUEST_IEX_STOCK,
+    symbol
+  }
+}
+
 export const RECEIVE_YAHOO_STOCK = 'RECEIVE_YAHOO_STOCK'
 export const receiveYahooStock = (symbol, stock) => {
   return {
     type: RECEIVE_YAHOO_STOCK,
+    symbol,
+    stock
+  }
+}
+
+export const RECEIVE_IEX_STOCK = 'RECEIVE_IEX_STOCK'
+export const receiveIexStock = (symbol, stock) => {
+  return {
+    type: RECEIVE_IEX_STOCK,
     symbol,
     stock
   }
@@ -122,6 +139,37 @@ export function errorHistory (symbol, error) {
     type: ERROR_HISTORY,
     symbol,
     error
+  }
+}
+
+function handleErrors (response) {
+  const { status } = response
+  if (status === 404) {
+    // console.log('a 404...')
+    return Promise.reject(response)
+  } else if (!response.ok) {
+    // console.log(response)
+    throw new Error(response.statusText)
+  }
+  return response
+}
+
+export const fetchIexStock = symbol => {
+  return dispatch => {
+    dispatch(requestIexStock(symbol))
+    return fetch(`https://api.iextrading.com/1.0/stock/${symbol}/quote`)
+      .then(handleErrors)
+      .then(response => {
+        // console.log(response)
+        const stock = response.json()
+        // console.log(stock)
+        dispatch(receiveIexStock(symbol, stock))
+        return stock
+      })
+      .then(stock => {
+        dispatch(receiveIexStock(symbol, stock))
+      })
+      .catch(console.log)
   }
 }
 

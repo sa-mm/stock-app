@@ -4,6 +4,8 @@ import {
   ERROR_HISTORY,
   REQUEST_YAHOO_STOCK,
   RECEIVE_YAHOO_STOCK,
+  REQUEST_IEX_STOCK,
+  RECEIVE_IEX_STOCK,
   YAHOO_ERROR,
 YAHOO_RESULT } from '../actions'
 
@@ -13,7 +15,8 @@ const initialState = {
   yahooError: '',
   yahooResult: [],
   history: {},
-  displayChart: false
+  displayChart: false,
+  stock: {}
 }
 
 export const currentStock = (state = initialState, action = {}) => {
@@ -22,6 +25,10 @@ export const currentStock = (state = initialState, action = {}) => {
       return Object.assign({}, state, {isFetching: true}, { yahooError: '' })
     case RECEIVE_YAHOO_STOCK:
       return Object.assign({}, state, { isFetching: false }, { yahooStock: action.stock })
+    case REQUEST_IEX_STOCK:
+      return Object.assign({}, state)
+    case RECEIVE_IEX_STOCK:
+      return Object.assign({}, state, { stock: action.stock })
     case YAHOO_ERROR:
       return {
         ...state,

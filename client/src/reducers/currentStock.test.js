@@ -12,7 +12,8 @@ const initialState = {
   yahooError: '',
   yahooResult: [],
   history: {},
-  displayChart: false
+  displayChart: false,
+  stock: {}
 }
 
 describe('reducer/currentStock', () => {

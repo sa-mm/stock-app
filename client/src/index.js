@@ -6,12 +6,12 @@ import App from './App'
 import 'semantic-ui-css/semantic.min.css'
 
 // State related
-import { compose, createStore, applyMiddleware } from 'redux' // state management
+import { compose, createStore, applyMiddleware } from 'redux'
 import { Provider, connect } from 'react-redux'
-import thunkMiddleware from 'redux-thunk' // for async actions
+import thunkMiddleware from 'redux-thunk'
 import persistState from 'redux-sessionstorage' // persist state through session
 import reducer from './reducers/index'
-import { buyStock, sellStock, fetchHistory, fetchYahooStock } from './actions'
+import { buyStock, sellStock, fetchHistory, fetchYahooStock, fetchIexStock } from './actions'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
@@ -37,7 +37,8 @@ const initialState = {
     yahooError: '',
     yahooResult: [],
     history: {},
-    displayChart: false
+    displayChart: false,
+    stock: {}
   }
 }
 
@@ -48,8 +49,6 @@ const store = createPersistentStore(
 
 const mapStateToProps = (state) => {
   return {
-    // stocks: state.portfolio.stocks,
-    // balance: state.portfolio.balance,
     portfolio: state.portfolio,
     currentStock: state.currentStock
   }
@@ -59,7 +58,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onBuyClick: (bid) => dispatch(buyStock(bid)),
     onSellClick: (sale) => dispatch(sellStock(sale)),
-    onSymbolSubmit: (symbol) => dispatch(fetchYahooStock(symbol)),
+    onSymbolSubmit: (symbol) => {
+      dispatch(fetchIexStock(symbol))
+      dispatch(fetchYahooStock(symbol))
+    },
     fetchHistory: (symbol) => dispatch(fetchHistory(symbol))
   }
 }
